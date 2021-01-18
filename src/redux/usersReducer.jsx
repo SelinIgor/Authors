@@ -9,7 +9,7 @@ const ADD_POST = 'ADD_POST'
 let InitialState ={
     users:[],
     posts:[],
-    comments:[]
+    comments:[],
 };
 
 
