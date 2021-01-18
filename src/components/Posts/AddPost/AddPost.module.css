@@ -1,0 +1,27 @@
+.formContainer{
+margin: auto 20px;
+}
+
+.btn{
+    padding: 5px 10px;
+    color: black;
+    background: #b7b4b4;
+    box-sizing: border-box;
+    transition: 0.2s all linear;
+    border: none;
+    font-size: 16px}
+.btn:hover{
+    font-weight: 700;
+    padding: 5px 14px;
+}
+
+.myTitle{
+    min-width: 250px;
+    outline: none;
+}
+
+.myText{
+    resize: none;
+    min-width: 250px;
+    outline: none;
+}
