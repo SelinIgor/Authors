@@ -4,13 +4,9 @@ import {connect} from "react-redux";
 import {setUsers} from "../../redux/usersReducer";
 import User from "./User/User";
 import {withRouter} from "react-router-dom";
-import {usersAPI} from "../api/api";
-
-
+import {usersAPI} from "../../api/api";
 
 class Users extends React.Component {
-
-
 
     componentDidMount() {
         usersAPI.getUsers().then(response=>{
@@ -26,7 +22,6 @@ class Users extends React.Component {
                     <div>
                         <div className={s.usersInner}>
                             <div>
-
                                 <div>
                                     <div>All users:</div>
                                     { this.props.users.map(person => <User person={person}/>)}

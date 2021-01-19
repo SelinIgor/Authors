@@ -1,12 +1,11 @@
-.container{
+.header {
+    background: darkgray;
+}
+
+.container {
     max-width: 1200px;
     width: 100%;
     margin: 0 auto;
-    background: darkgray;
-}
-.header{
- background: darkgray;
- width: 100%;
 }
 
 .headerInner{
@@ -14,6 +13,7 @@
     justify-content: flex-start;
     align-items: center;
     min-height: 50px;
+    margin: 0 20px;
 }
 
 
@@ -24,7 +24,9 @@
 .navItem a{
    text-decoration: none;
     color: #000000;
+    transition: 0.2s color linear;
 }
 .navItem a:hover{
-    font-weight: 700;
+    color: white;
+    border-bottom: 2px solid #000000;
 }

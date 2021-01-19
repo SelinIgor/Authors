@@ -1,14 +1,11 @@
 import * as axios from "axios";
 
-
 const instance = axios.create(
     {
         withCredentials: true,
         baseURL: " https://jsonplaceholder.typicode.com/",
     }
 )
-
-
 
 export const usersAPI = {
     getUsers(){
@@ -22,7 +19,6 @@ export const usersAPI = {
         })
     },
     getComments(postId){
-
         return instance.get(`comments?postId=${postId}`).then(response =>{
             return response.data
         })
@@ -38,7 +34,6 @@ export const usersAPI = {
         })
     },
     editPost(postId,post){
-        debugger
         return instance.put(`posts/${postId}`,{post}).then(response=>{
             return response.data
         })

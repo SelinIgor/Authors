@@ -4,7 +4,7 @@ import {addPostThunk, setPosts} from "../../redux/usersReducer";
 import {connect} from "react-redux";
 import {withRouter} from "react-router-dom";
 import Post from "./Post/Post";
-import {usersAPI} from "../api/api";
+import {usersAPI} from "../../api/api";
 
 
 class Posts extends React.Component {
@@ -25,7 +25,7 @@ class Posts extends React.Component {
             <div className={s.container}>
                 <div className={s.postsInner}>
                     <div>
-                    {this.props.posts.map(person => <div><Post person={person} postId={person.id}/></div>)}
+                    {this.props.posts.map(post => <div><Post post={post}/></div>)}
                     </div>
                 </div>
             </div>

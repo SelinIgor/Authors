@@ -11,7 +11,7 @@ class Header extends React.Component {
                 <div className={s.container}>
                     <div className={s.headerInner}>
                         <div  className={s.navItem}>   <NavLink to={"/"}>Users</NavLink></div>
-                       <div  className={s.navItem}> <NavLink to={"/MyPosts"}>My Posts</NavLink></div>
+                       <div  className={s.navItem}> <NavLink to={"/MyPosts"}>My posts</NavLink></div>
                     </div>
                 </div>
 

@@ -1,13 +1,15 @@
-.users{
+.users {
     margin: 20px 0;
 }
-.container{
+
+.container {
     max-width: 1200px;
     width: 100%;
     margin: 0 auto;
 }
-.usersInner{
-display: flex;
-justify-content: flex-start;
 
+.usersInner {
+    display: flex;
+    justify-content: flex-start;
+    margin: 0 20px;
 }
