@@ -10,7 +10,7 @@ const FullPost = (props)=>{
             <div className={s.container}>
                 <div className={s.postsInner}>
             <p>Name: {post.name}</p>
-            <p>Body: {post.body}</p>
+            <p>Comment: {post.body}</p>
             <p>Email: {post.email}</p>
                 </div>
             </div>
