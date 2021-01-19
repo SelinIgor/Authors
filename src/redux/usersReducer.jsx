@@ -4,18 +4,20 @@ const SET_USERS = 'SET_USERS';
 const SET_POSTS = 'SET_POSTS';
 const SET_COMMENTS = 'SET_COMMENTS'
 const ADD_POST = 'ADD_POST'
-
+const DELETE_POST = 'DELETE_POST'
+const EDIT_POST = 'EDIT_POST'
 
 let InitialState ={
     users:[],
     posts:[],
     comments:[],
+    myPosts:[]
 };
 
 
 let usersReducer=(state
 = InitialState,action)=> {
-
+debugger
     switch (action.type) {
 
         case SET_USERS:
@@ -34,23 +36,36 @@ let usersReducer=(state
         }
         case SET_COMMENTS:
             {
-
             return{
                 ...state,
                 comments: [...action.comments]
             }
-
         }
-
         case ADD_POST:
         {
             return {
                 ...state,
-                posts: [...state.posts, action.payload]
+                myPosts: [...state.myPosts, action.payload]
             }
         }
-
-
+        case DELETE_POST:{
+            const posts = state.posts.filter(item => item.id !== action.postId)
+            return {
+                ...state,
+                posts:[...posts]
+            }
+        }
+        case EDIT_POST:{
+            return {
+                /*
+                *
+                *
+                *
+                *
+                *
+                * */
+            }
+        }
         default:
             return state
     }}
@@ -95,9 +110,10 @@ export const addPost = (post)=>{
     return{type: ADD_POST,payload: post}
 }
 
-export const addPostThunk = (title, body)=>{
+export const addPostThunk = (title, body,postId)=>{
+
     return(dispatch)=>{
-        usersAPI.addPost(title, body).then(response =>{
+        usersAPI.addPost(title, body,postId).then(response =>{
             console.log(response.data)
           dispatch(addPost(response.data))
 
@@ -105,6 +121,38 @@ export const addPostThunk = (title, body)=>{
     }
 }
 
+const deletePost = (postId)=>{
+    debugger
+    return{type: DELETE_POST, postId}
+}
+
+export const deletePostThunk = (id)=>{
+    debugger
+    return(dispatch)=>{
+        usersAPI.deletePost(id).then(response=> {
+          console.log(response)
+            dispatch(deletePost(id))
+
+        }
+    )
+    }
+}
+
+const editPost = (postId, post)=>{
+    return{type: EDIT_POST, postId, post}
+}
+
+export const editPostThunk = (id,post)=>{
+    debugger
+    return(dispatch)=>{
+        usersAPI.editPost(id,post).then(response=> {
+                console.log(response)
+                dispatch(editPost(id,response.data))
+
+            }
+        )
+    }
+}
 
 
 export default usersReducer;

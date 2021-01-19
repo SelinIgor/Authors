@@ -31,6 +31,15 @@ export const usersAPI = {
         return instance.post(`posts`,{title, body}).then(response=>{
             return  response
         })
+    },
+    deletePost(postId){
+        return instance.delete(`posts/${postId}`).then(response=>{
+            return response.data
+        })
+    },
+    editPost(post, postId){
+        return instance.put(`posts/${postId}`,{post}).then(response=>{
+            return response.data
+        })
     }
-
 }

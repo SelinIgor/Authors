@@ -2,19 +2,29 @@
     max-width: 1200px;
     width: 100%;
     margin: 0 auto;
+    background: darkgray;
 }
 .header{
  background: darkgray;
+ width: 100%;
 }
-
-
 
 .headerInner{
     display: flex;
-    justify-content: center;
+    justify-content: flex-start;
+    align-items: center;
+    min-height: 50px;
 }
 
-.headerInner p{
+
+.navItem{
+    margin-right: 10px;
     font-size: 20px;
+}
+.navItem a{
+   text-decoration: none;
+    color: #000000;
+}
+.navItem a:hover{
     font-weight: 700;
 }

@@ -3,9 +3,13 @@
 }
 .post{
     background: #cacaca;
-    width: 600px;
-    margin: 20px 30px;
+    margin-bottom: 20px;
     padding: 10px;
+    width: 100%;
+}
+.buttons{
+    display: flex;
+    justify-content: space-between;
 }
 .details{
     padding: 5px 10px;
@@ -14,8 +18,24 @@
     background: #b7b4b4;
     box-sizing: border-box;
     transition: 0.2s all linear;
+    cursor: pointer;
 }
 .details:hover{
     font-weight: 700;
     padding: 5px 14px;
+}
+.deleteButton{
+    padding: 5px 10px;
+    color: black;
+    background: #b7b4b4;
+    box-sizing: border-box;
+    transition: 0.2s all linear;
+    border: none;
+    outline: none;
+
+}
+.deleteButton:hover{
+    font-weight: 700;
+    padding: 5px 14px;
+    background: #ffa991;
 }

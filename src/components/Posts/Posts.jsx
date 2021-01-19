@@ -1,11 +1,11 @@
-import React, {useEffect} from 'react'
+import React from 'react'
 import s from './Posts.module.css'
 import {addPostThunk, setPosts} from "../../redux/usersReducer";
 import {connect} from "react-redux";
 import {withRouter} from "react-router-dom";
 import Post from "./Post/Post";
-import AddPostRedux from "./AddPost/AddPost";
 import {usersAPI} from "../api/api";
+
 
 class Posts extends React.Component {
 
@@ -21,18 +21,12 @@ class Posts extends React.Component {
 
     render() {
 
-
-        const onSubmit = (value) => {
-
-            this.props.addPostThunk(value.title, value.body)
-
-        }
-
         return (<div className={s.posts}>
             <div className={s.container}>
                 <div className={s.postsInner}>
-                    <AddPostRedux onSubmit={onSubmit}/>
+                    <div>
                     {this.props.posts.map(person => <div><Post person={person} postId={person.id}/></div>)}
+                    </div>
                 </div>
             </div>
         </div>)
@@ -43,7 +37,8 @@ class Posts extends React.Component {
 
 const mapStateToProps = (state) => {
         return {
-            posts: state.UsersPage.posts
+            posts: state.UsersPage.posts,
+            myPosts: state.UsersPage.myPosts
         }
     }
 export default withRouter(connect(mapStateToProps,{setPosts,addPostThunk})(Posts))
