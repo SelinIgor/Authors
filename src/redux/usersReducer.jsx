@@ -7,17 +7,15 @@ const ADD_POST = 'ADD_POST'
 const DELETE_POST = 'DELETE_POST'
 const EDIT_POST = 'EDIT_POST'
 
+
 let InitialState ={
     users:[],
     posts:[],
     comments:[],
     myPosts:[]
 };
-
-
 let usersReducer=(state
-= InitialState,action)=> {
-debugger
+                      = InitialState,action)=> {
     switch (action.type) {
 
         case SET_USERS:
@@ -49,21 +47,23 @@ debugger
             }
         }
         case DELETE_POST:{
-            const posts = state.posts.filter(item => item.id !== action.postId)
+            let posts = state.posts.filter(item => item.id !== action.postId)
             return {
                 ...state,
                 posts:[...posts]
             }
         }
         case EDIT_POST:{
+         debugger
             return {
-                /*
-                *
-                *
-                *
-                *
-                *
-                * */
+                ...state,
+                posts: state.posts.map(post=>{
+                    if(post.id===action.postId ){
+                        post={...action.post}
+                    }
+                    return post;
+                })
+
             }
         }
         default:
@@ -122,12 +122,11 @@ export const addPostThunk = (title, body,postId)=>{
 }
 
 const deletePost = (postId)=>{
-    debugger
+debugger
     return{type: DELETE_POST, postId}
 }
 
 export const deletePostThunk = (id)=>{
-    debugger
     return(dispatch)=>{
         usersAPI.deletePost(id).then(response=> {
           console.log(response)
@@ -139,16 +138,16 @@ export const deletePostThunk = (id)=>{
 }
 
 const editPost = (postId, post)=>{
+    debugger
     return{type: EDIT_POST, postId, post}
 }
 
 export const editPostThunk = (id,post)=>{
-    debugger
     return(dispatch)=>{
+        debugger
         usersAPI.editPost(id,post).then(response=> {
                 console.log(response)
-                dispatch(editPost(id,response.data))
-
+                dispatch(editPost(id, response.post))
             }
         )
     }

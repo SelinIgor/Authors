@@ -37,7 +37,8 @@ export const usersAPI = {
             return response.data
         })
     },
-    editPost(post, postId){
+    editPost(postId,post){
+        debugger
         return instance.put(`posts/${postId}`,{post}).then(response=>{
             return response.data
         })

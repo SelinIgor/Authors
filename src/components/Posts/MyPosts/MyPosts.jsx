@@ -8,6 +8,7 @@ import {addPostThunk, deletePostThunk} from "../../../redux/usersReducer";
 const MyPosts = (props)=>{
 
     const onSubmitForm = (value) => {
+        debugger
         props.addPostThunk(value.title, value.body,value.postId)
     }
     return(

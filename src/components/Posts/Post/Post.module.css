@@ -1,6 +1,3 @@
-.postContainer{
-    display: flex;
-}
 .post{
     background: #cacaca;
     margin-bottom: 20px;
@@ -24,18 +21,17 @@
     font-weight: 700;
     padding: 5px 14px;
 }
-.deleteButton{
+.button{
     padding: 5px 10px;
     color: black;
     background: #b7b4b4;
-    box-sizing: border-box;
     transition: 0.2s all linear;
     border: none;
     outline: none;
-
+    margin-left: 20px;
 }
-.deleteButton:hover{
+.button:hover{
     font-weight: 700;
     padding: 5px 14px;
-    background: #ffa991;
 }
+
