@@ -7,13 +7,25 @@ const ADD_POST = 'ADD_POST'
 const DELETE_POST = 'DELETE_POST'
 const EDIT_POST = 'EDIT_POST'
 
-let InitialState ={
+let InitialState:InitialStateType ={
     users:[],
     posts:[],
     comments:[],
     myPosts:[]
-};
-let usersReducer=(state = InitialState,action)=> {
+}
+type InitialStateType ={
+    users: Array<Object>
+    posts: Array<Posts>
+    comments: Array<Object>
+    myPosts: Array<Object>
+}
+type Posts ={
+    userId: number
+    id:number
+    title: string
+    body: string
+}
+let usersReducer=(state = InitialState,action: any):InitialStateType=> {
     switch (action.type) {
 
         case SET_USERS:
@@ -52,7 +64,7 @@ let usersReducer=(state = InitialState,action)=> {
             }
         }
         case EDIT_POST:{
-         debugger
+
             return {
                 ...state,
                 posts: state.posts.map(post=>{
@@ -68,23 +80,32 @@ let usersReducer=(state = InitialState,action)=> {
             return state
     }}
 
-export const setUsers =(persons)=>{
+export const setUsers:setUsers =(persons)=>{
 
     return{type: SET_USERS, persons}
 }
-export const setPosts=(posts)=>{
+type setUsers = (persons:Array<Object>)=>{
+     type: typeof SET_USERS, persons: Array<Object>
+}
+export const setPosts:setPosts=(posts)=>{
 
     return{type: SET_POSTS, posts}
 }
-
-export const setComments=(comments)=>{
-    return{type: SET_COMMENTS, comments}
+type setPosts = (posts:Array<Object>)=>{
+    type: typeof SET_POSTS, posts: Array<Object>
 }
 
+export const setComments:setComments=(comments)=>{
+    return{type: SET_COMMENTS, comments}
+}
+type setComments = (comments:Array<Object>)=>{
+    type: typeof SET_COMMENTS, comments: Array<Object>
+}
 
-export const getComments = (postId) =>{
-    return (dispatch)=>{
+export const getComments = (postId:number) =>{
+    return (dispatch:any)=>{
 
+        // @ts-ignore
         usersAPI.getComments(postId).then(response => {
             dispatch(setComments(response))
 
@@ -92,9 +113,10 @@ export const getComments = (postId) =>{
     }
 };
 
-export const getPosts = (userId) =>{
-    return (dispatch)=>{
+export const getPosts = (userId:number) =>{
+    return (dispatch:any)=>{
 
+        // @ts-ignore
         usersAPI.getPosts(userId).then(response => {
             dispatch(setPosts(response.data))
 
@@ -104,14 +126,20 @@ export const getPosts = (userId) =>{
 
 
 
-export const addPost = (post)=>{
+export const addPost:addPost = (post)=>{
     return{type: ADD_POST,payload: post}
 }
 
-export const addPostThunk = (title, body,postId)=>{
 
-    return(dispatch)=>{
-        usersAPI.addPost(title, body,postId).then(response =>{
+type addPost = (post:Object)=>{
+    type: typeof ADD_POST, // @ts-ignore
+    payload: post
+}
+export const addPostThunk = (title:string, body:string)=>{
+
+    return(dispatch:any)=>{
+        // @ts-ignore
+        usersAPI.addPost(title, body).then(response =>{
             console.log(response.data)
           dispatch(addPost(response.data))
 
@@ -119,13 +147,16 @@ export const addPostThunk = (title, body,postId)=>{
     }
 }
 
-const deletePost = (postId)=>{
-debugger
+const deletePost:deletePost = (postId)=>{
     return{type: DELETE_POST, postId}
 }
+type deletePost = (postId: number)=>{
+    type: typeof DELETE_POST, postId:number
+}
 
-export const deletePostThunk = (id)=>{
-    return(dispatch)=>{
+export const deletePostThunk = (id:number)=>{
+    return(dispatch:any)=>{
+        // @ts-ignore
         usersAPI.deletePost(id).then(response=> {
           console.log(response)
             dispatch(deletePost(id))
@@ -135,14 +166,17 @@ export const deletePostThunk = (id)=>{
     }
 }
 
-const editPost = (postId, post)=>{
-    debugger
+const editPost:editPost = (postId, post)=>{
     return{type: EDIT_POST, postId, post}
 }
+type editPost = (postId: number,post:Object)=>{
+    type: typeof EDIT_POST, postId:number,post:Object
+}
 
-export const editPostThunk = (id,post)=>{
-    return(dispatch)=>{
+export const editPostThunk = (id:number,post:Object)=>{
+    return(dispatch:any)=>{
         debugger
+        // @ts-ignore
         usersAPI.editPost(id,post).then(response=> {
                 console.log(response)
                 dispatch(editPost(id, response.post))
