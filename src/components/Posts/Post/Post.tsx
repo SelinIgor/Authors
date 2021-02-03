@@ -1,4 +1,4 @@
-import React, {useState} from 'react'
+import React, {FC, useState} from 'react'
 import s from './Post.module.css'
 import style from './../AddPost/AddPost.module.css'
 import {NavLink, withRouter} from "react-router-dom";
@@ -6,14 +6,22 @@ import {connect} from "react-redux";
 import {deletePostThunk, editPostThunk, getComments} from "../../../redux/usersReducer";
 import {Field, reduxForm} from "redux-form";
 
-const Post = (props) => {
+type PropsType ={
+    getComments: (id: number)=>void
+    deletePostThunk: (id: number)=>void
+    editPostThunk: (id: number, value: any)=> void
+
+
+}
+
+const Post: FC<PropsType> = (props) => {
     const onClick = () => {
         return (
             props.getComments(props.post.id)
 
         )
     }
-    const deletePost = (id) => {
+    const deletePost = (id: number) => {
         setEditMode(false);
         props.deletePostThunk(id)
     }
@@ -21,7 +29,7 @@ const Post = (props) => {
     const ActivateEditMode = ()=>{
         setEditMode(true)
     }
-    const DeactivateEditMode = (value) =>{
+    const DeactivateEditMode = (value: any) =>{
         setEditMode(false);
         props.editPostThunk(props.post.id,value)
     }
@@ -44,7 +52,7 @@ const Post = (props) => {
         </div>
     )
 }
-let EditPost = (props)=>{
+let EditPost = (props: any)=>{
     return(<form onSubmit={props.handleSubmit}>
         <div >
             <div> <Field className={style.myTitle}  type={"text"}  name={"title"} component={"input"} placeholder={"Your title..."}/></div>
@@ -55,4 +63,7 @@ let EditPost = (props)=>{
 };
 let EditPostRedux = reduxForm({form:"editPost"})(EditPost)
 
+
+
+// @ts-ignore
 export default withRouter(connect(null,{getComments,deletePostThunk,editPostThunk})(Post))

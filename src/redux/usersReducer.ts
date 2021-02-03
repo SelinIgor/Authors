@@ -1,4 +1,5 @@
 import {usersAPI} from "../api/api";
+import {AppStateType} from "./reduxStore";
 
 const SET_USERS = 'SET_USERS';
 const SET_POSTS = 'SET_POSTS';
@@ -17,9 +18,9 @@ type InitialStateType ={
     users: Array<Object>
     posts: Array<Posts>
     comments: Array<Object>
-    myPosts: Array<Object>
+    myPosts: Array<Posts>
 }
-type Posts ={
+export type Posts ={
     userId: number
     id:number
     title: string
@@ -80,6 +81,9 @@ let usersReducer=(state = InitialState,action: any):InitialStateType=> {
             return state
     }}
 
+type ActionType = setUsers & setPosts & setComments & addPost & deletePost & editPost;
+type setStateType = () => AppStateType
+
 export const setUsers:setUsers =(persons)=>{
 
     return{type: SET_USERS, persons}
@@ -103,8 +107,7 @@ type setComments = (comments:Array<Object>)=>{
 }
 
 export const getComments = (postId:number) =>{
-    return (dispatch:any)=>{
-
+    return (dispatch:ActionType, getState: setStateType)=>{
         // @ts-ignore
         usersAPI.getComments(postId).then(response => {
             dispatch(setComments(response))
@@ -114,7 +117,7 @@ export const getComments = (postId:number) =>{
 };
 
 export const getPosts = (userId:number) =>{
-    return (dispatch:any)=>{
+    return (dispatch:ActionType)=>{
 
         // @ts-ignore
         usersAPI.getPosts(userId).then(response => {
@@ -137,7 +140,7 @@ type addPost = (post:Object)=>{
 }
 export const addPostThunk = (title:string, body:string)=>{
 
-    return(dispatch:any)=>{
+    return(dispatch:ActionType)=>{
         // @ts-ignore
         usersAPI.addPost(title, body).then(response =>{
             console.log(response.data)
@@ -155,7 +158,7 @@ type deletePost = (postId: number)=>{
 }
 
 export const deletePostThunk = (id:number)=>{
-    return(dispatch:any)=>{
+    return(dispatch:ActionType)=>{
         // @ts-ignore
         usersAPI.deletePost(id).then(response=> {
           console.log(response)
@@ -174,7 +177,7 @@ type editPost = (postId: number,post:Object)=>{
 }
 
 export const editPostThunk = (id:number,post:Object)=>{
-    return(dispatch:any)=>{
+    return(dispatch:ActionType)=>{
         debugger
         // @ts-ignore
         usersAPI.editPost(id,post).then(response=> {

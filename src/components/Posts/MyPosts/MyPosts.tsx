@@ -2,12 +2,19 @@ import React from 'react'
 import s from "../Posts.module.css";
 import AddPostRedux from "../AddPost/AddPost";
 import {connect} from "react-redux";
-import {addPostThunk, deletePostThunk} from "../../../redux/usersReducer";
+import {addPostThunk, Posts} from "../../../redux/usersReducer";
+import {AppStateType} from "../../../redux/reduxStore";
+
+type PropsType = {
+    addPostThunk: (title: string, body: string, postId: number)=>void
+    myPosts: Array<Posts>
+}
+
+const MyPosts = (props: PropsType)=>{
 
 
-const MyPosts = (props)=>{
 
-    const onSubmitForm = (value) => {
+    const onSubmitForm = (value: any) => {
         debugger
         props.addPostThunk(value.title, value.body,value.postId)
     }
@@ -26,10 +33,10 @@ const MyPosts = (props)=>{
     )
 }
 
-const mapStateToProps = (state)=>{
+const mapStateToProps = (state: AppStateType)=>{
     return{
         myPosts: state.UsersPage.myPosts
     }
 }
 
-export default connect(mapStateToProps,{addPostThunk,deletePostThunk})(MyPosts)
+export default connect(mapStateToProps,{addPostThunk})(MyPosts)
